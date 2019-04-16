@@ -1,0 +1,39 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: shared-pvc
+  namespace: default
+spec:
+  storageClassName: scdefaultgluster
+  resources:
+    requests:
+      storage: 1Gi
+  accessModes:
+  - ReadWriteMany
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: couchdb1-data-pvc
+  namespace: default
+spec:
+  storageClassName: scdefaultgluster
+  resources:
+    requests:
+      storage: 1Gi
+  accessModes:
+  - ReadWriteMany
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: couchdb2-data-pvc
+  namespace: default
+spec:
+  storageClassName: scdefaultgluster
+  resources:
+    requests:
+      storage: 1Gi
+  accessModes:
+  - ReadWriteMany

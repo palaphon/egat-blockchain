@@ -1,0 +1,30 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: composer-playground
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: composer-playground
+    spec:
+      volumes:
+      - name: composer-card-store
+        persistentVolumeClaim:
+          claimName: composer-pvc
+      containers:
+      - name: composer-playground
+        image: ibmblockchain/composer-playground:0.16.2
+        imagePullPolicy: Always
+        env:
+        - name: HTTP_PROXY
+          value: "http://proxy.egat.co.th:8080"
+        - name: HTTPS_PROXY
+          value: "http://proxy.egat.co.th:8080"
+        - name: NO_PROXY
+          value: "10.205.51.76,mycluster.icp,mongodb,platform-identity-provider,platform-identity-management,icp-management-ingress,localhost,127.0.0.1,10.205.51.0/24,10.1.0.0/16,10.0.0.1/24,blockchain-ca,blockchain-orderer,blockchain-org1peer1,blockchain-org2peer1"
+        volumeMounts:
+        - name: composer-card-store
+          mountPath: /home/composer/.composer
